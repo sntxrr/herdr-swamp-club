@@ -1,0 +1,39 @@
+# Swamp Club -- a herdr theme. Bioluminescent swamp at night.
+# https://github.com/sntxrr/herdr-swamp-club
+#
+# Paste this over the [theme] section of ~/.config/herdr/config.toml
+# (or run install.sh), then: herdr server reload-config
+#
+# The base is catppuccin because herdr's token names (mauve, peach,
+# subtext0, ...) are catppuccin's. Every token is overridden below, so the
+# base only supplies anything not listed here.
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[theme.custom]
+# surfaces: black water -> moss, greener as it comes forward
+panel_bg      = "#080a08"
+sidebar_bg    = "#0b0f0b"
+surface_dim   = "#0d120d"
+surface0      = "#121a12"
+surface1      = "#1a261a"
+active_row_bg = "#14241a"   # focused Space / Agent row: lit moss
+selection_bg  = "#1c3322"   # Navigate-mode cursor row: brighter moss
+overlay0      = "#3d5240"   # borders, separators, dim glyphs
+overlay1      = "#5f7a62"
+
+# text: pale lichen on black
+text          = "#d6ead0"
+subtext0      = "#8fae8c"
+
+# the glow
+accent        = "#39ff14"   # neon green -- highlights, focus
+green         = "#4ade80"   # done / ahead (distinct from accent on purpose)
+teal          = "#22d3ee"   # cyan wisp
+blue          = "#60a5fa"
+mauve         = "#e879f9"   # magenta wisp
+peach         = "#fb923c"   # ember / working
+yellow        = "#fde047"   # needs attention
+red           = "#ff003c"   # blocked / behind

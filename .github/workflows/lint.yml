@@ -1,0 +1,52 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: shellcheck install.sh
+        run: shellcheck -S style install.sh
+
+      - name: theme file parses and carries every token
+        run: |
+          python3 - <<'PY'
+          import tomllib
+          with open("swamp-club.toml", "rb") as f:
+              cfg = tomllib.load(f)
+          want = {
+              "accent", "panel_bg", "sidebar_bg", "active_row_bg", "selection_bg",
+              "surface0", "surface1", "surface_dim", "overlay0", "overlay1",
+              "text", "subtext0", "mauve", "green", "yellow", "red", "blue",
+              "teal", "peach",
+          }
+          got = set(cfg["theme"]["custom"])
+          assert got == want, f"missing={want-got} extra={got-want}"
+          import re
+          bad = [k for k, v in cfg["theme"]["custom"].items()
+                 if not re.fullmatch(r"#[0-9a-f]{6}", v)]
+          assert not bad, f"non-hex values: {bad}"
+          print(f"ok: {len(got)} tokens, all #rrggbb")
+          PY
+
+      - name: install.sh round-trips a config that already has a theme
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          printf 'onboarding = false\n[theme]\nname = "dracula"\n\n[theme.custom]\naccent = "#ff0000"\n\n[ui]\nsidebar_width = 30\n' > "$tmp"
+          ./install.sh --config "$tmp"
+          python3 - "$tmp" <<'PY'
+          import sys, tomllib
+          cfg = tomllib.load(open(sys.argv[1], "rb"))
+          assert cfg["theme"]["name"] == "catppuccin"
+          assert cfg["theme"]["custom"]["accent"] == "#39ff14"
+          assert cfg["ui"]["sidebar_width"] == 30, "unrelated table was lost"
+          assert cfg["onboarding"] is False
+          print("ok: old theme replaced, other tables intact")
+          PY
