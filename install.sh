@@ -30,7 +30,8 @@ while [ $# -gt 0 ]; do
 done
 
 # Prefer a local copy when run from a clone; otherwise fetch from GitHub.
-here="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || true)"
+here=""
+if here="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd)"; then :; else here=""; fi
 if [ -n "$here" ] && [ -f "$here/swamp-club.toml" ]; then
     theme="$(cat "$here/swamp-club.toml")"
 else
