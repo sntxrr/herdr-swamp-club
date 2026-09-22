@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="484" viewBox="0 0 980 484" font-family="ui-monospace,Menlo,monospace">
+<rect width="980" height="484" fill="#080808"/>
+<text x="24" y="38" fill="#39ff14" font-size="20" font-weight="700">Swamp Club</text>
+<text x="174" y="38" fill="#9ca3af" font-size="13">the swamp-club.com palette</text>
+<text x="24" y="80" fill="#6b7280" font-size="12">surfaces</text>
+<rect x="120" y="68" width="96" height="64" rx="6" fill="#080808" stroke="#4b5563" stroke-width="1"/>
+<text x="120" y="150" fill="#d1d5db" font-size="11">panel_bg</text>
+<text x="120" y="165" fill="#9ca3af" font-size="11">#080808</text>
+<rect x="226" y="68" width="96" height="64" rx="6" fill="#000000" stroke="#4b5563" stroke-width="1"/>
+<text x="226" y="150" fill="#d1d5db" font-size="11">sidebar_bg</text>
+<text x="226" y="165" fill="#9ca3af" font-size="11">#000000</text>
+<rect x="332" y="68" width="96" height="64" rx="6" fill="#0d0d0d" stroke="#4b5563" stroke-width="1"/>
+<text x="332" y="150" fill="#d1d5db" font-size="11">surface_dim</text>
+<text x="332" y="165" fill="#9ca3af" font-size="11">#0d0d0d</text>
+<rect x="438" y="68" width="96" height="64" rx="6" fill="#1a1a1a" stroke="#4b5563" stroke-width="1"/>
+<text x="438" y="150" fill="#d1d5db" font-size="11">surface0</text>
+<text x="438" y="165" fill="#9ca3af" font-size="11">#1a1a1a</text>
+<rect x="544" y="68" width="96" height="64" rx="6" fill="#262626" stroke="#4b5563" stroke-width="1"/>
+<text x="544" y="150" fill="#d1d5db" font-size="11">surface1</text>
+<text x="544" y="165" fill="#9ca3af" font-size="11">#262626</text>
+<rect x="650" y="68" width="96" height="64" rx="6" fill="#071b0f" stroke="#4b5563" stroke-width="1"/>
+<text x="650" y="150" fill="#d1d5db" font-size="11">active_row_bg</text>
+<text x="650" y="165" fill="#9ca3af" font-size="11">#071b0f</text>
+<rect x="756" y="68" width="96" height="64" rx="6" fill="#062e16" stroke="#4b5563" stroke-width="1"/>
+<text x="756" y="150" fill="#d1d5db" font-size="11">selection_bg</text>
+<text x="756" y="165" fill="#9ca3af" font-size="11">#062e16</text>
+<rect x="862" y="68" width="96" height="64" rx="6" fill="#4b5563" stroke="#4b5563" stroke-width="1"/>
+<text x="862" y="150" fill="#d1d5db" font-size="11">overlay0</text>
+<text x="862" y="165" fill="#9ca3af" font-size="11">#4b5563</text>
+<rect x="968" y="68" width="96" height="64" rx="6" fill="#6b7280" stroke="#4b5563" stroke-width="1"/>
+<text x="968" y="150" fill="#d1d5db" font-size="11">overlay1</text>
+<text x="968" y="165" fill="#9ca3af" font-size="11">#6b7280</text>
+<text x="24" y="212" fill="#6b7280" font-size="12">text</text>
+<rect x="120" y="200" width="96" height="64" rx="6" fill="#d1d5db" stroke="#4b5563" stroke-width="1"/>
+<text x="120" y="282" fill="#d1d5db" font-size="11">text</text>
+<text x="120" y="297" fill="#9ca3af" font-size="11">#d1d5db</text>
+<rect x="226" y="200" width="96" height="64" rx="6" fill="#9ca3af" stroke="#4b5563" stroke-width="1"/>
+<text x="226" y="282" fill="#d1d5db" font-size="11">subtext0</text>
+<text x="226" y="297" fill="#9ca3af" font-size="11">#9ca3af</text>
+<text x="24" y="344" fill="#6b7280" font-size="12">glow</text>
+<rect x="120" y="332" width="96" height="64" rx="6" fill="#39ff14" stroke="#4b5563" stroke-width="1"/>
+<text x="120" y="414" fill="#d1d5db" font-size="11">accent</text>
+<text x="120" y="429" fill="#9ca3af" font-size="11">#39ff14</text>
+<rect x="226" y="332" width="96" height="64" rx="6" fill="#05df72" stroke="#4b5563" stroke-width="1"/>
+<text x="226" y="414" fill="#d1d5db" font-size="11">green</text>
+<text x="226" y="429" fill="#9ca3af" font-size="11">#05df72</text>
+<rect x="332" y="332" width="96" height="64" rx="6" fill="#00d3f2" stroke="#4b5563" stroke-width="1"/>
+<text x="332" y="414" fill="#d1d5db" font-size="11">teal</text>
+<text x="332" y="429" fill="#9ca3af" font-size="11">#00d3f2</text>
+<rect x="438" y="332" width="96" height="64" rx="6" fill="#60a5fa" stroke="#4b5563" stroke-width="1"/>
+<text x="438" y="414" fill="#d1d5db" font-size="11">blue</text>
+<text x="438" y="429" fill="#9ca3af" font-size="11">#60a5fa</text>
+<rect x="544" y="332" width="96" height="64" rx="6" fill="#e879f9" stroke="#4b5563" stroke-width="1"/>
+<text x="544" y="414" fill="#d1d5db" font-size="11">mauve</text>
+<text x="544" y="429" fill="#9ca3af" font-size="11">#e879f9</text>
+<rect x="650" y="332" width="96" height="64" rx="6" fill="#ff8904" stroke="#4b5563" stroke-width="1"/>
+<text x="650" y="414" fill="#d1d5db" font-size="11">peach</text>
+<text x="650" y="429" fill="#9ca3af" font-size="11">#ff8904</text>
+<rect x="756" y="332" width="96" height="64" rx="6" fill="#fde047" stroke="#4b5563" stroke-width="1"/>
+<text x="756" y="414" fill="#d1d5db" font-size="11">yellow</text>
+<text x="756" y="429" fill="#9ca3af" font-size="11">#fde047</text>
+<rect x="862" y="332" width="96" height="64" rx="6" fill="#ff003c" stroke="#4b5563" stroke-width="1"/>
+<text x="862" y="414" fill="#d1d5db" font-size="11">red</text>
+<text x="862" y="429" fill="#9ca3af" font-size="11">#ff003c</text>
+</svg>
