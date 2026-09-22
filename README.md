@@ -18,8 +18,9 @@ curl -fsSL https://raw.githubusercontent.com/sntxrr/herdr-swamp-club/main/instal
 ```
 
 That backs up `~/.config/herdr/config.toml` next to itself, replaces the
-`[theme]` section with Swamp Club, validates the result, and reloads a running
-herdr. Nothing else in your config is touched. Add `--dry-run` to see the diff
+`[theme]` section with Swamp Club, installs the [sounds](#sounds), validates
+the result, and reloads a running herdr. Nothing else in your config is
+touched. Add `--no-sounds` for the colours alone. Add `--dry-run` to see the diff
 first:
 
 ```sh
@@ -42,8 +43,8 @@ curl -fsSL https://raw.githubusercontent.com/sntxrr/herdr-swamp-club/main/instal
 
 ## Uninstall
 
-Restore the backup the installer wrote (or just delete the two `[theme]`
-tables) and reload:
+Restore the backup the installer wrote (or delete the two `[theme]` tables
+and the two `# Swamp Club` lines under `[ui.sound]`) and reload:
 
 ```sh
 cp ~/.config/herdr/config.toml.bak-<timestamp> ~/.config/herdr/config.toml
@@ -67,6 +68,24 @@ herdr server reload-config
 `accent` and `green` are deliberately different: the neon marks focus and
 highlights, while agent *done* states use the calmer green so a sidebar full
 of finished agents doesn't glow.
+
+## Sounds
+
+Two short, soft chip-tune blips, with a nod to the hop in Frogger:
+
+| when | file | sound |
+|---|---|---|
+| an agent finishes | [`sounds/done.mp3`](sounds/done.mp3) | two hops, then a bright landing chime |
+| an agent needs you | [`sounds/request.mp3`](sounds/request.mp3) | a hop cut short by a buzzy splat and a cyan/magenta glitch |
+
+swamp-club.com has no audio of its own, and none of Frogger's is used: both
+are synthesized from scratch by [`sounds/make-sounds.py`](sounds/make-sounds.py)
+(standard-library Python plus `lame`), so they can be tweaked and rebuilt.
+
+The installer copies them to `~/.config/herdr/sounds/swamp-club-*.mp3` and
+sets `done_path` / `request_path` under `[ui.sound]`. It leaves `enabled`,
+any single `path`, and `[ui.sound.agents]` as you had them. herdr only plays
+them for agents in background workspaces.
 
 ## Tweaks
 

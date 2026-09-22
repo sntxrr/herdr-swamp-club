@@ -50,3 +50,39 @@ jobs:
           assert cfg["onboarding"] is False
           print("ok: old theme replaced, other tables intact")
           PY
+
+      - name: sounds are real mp3s
+        run: |
+          python3 - <<'PY'
+          for name in ("done", "request"):
+              with open(f"sounds/{name}.mp3", "rb") as f:
+                  head = f.read(3)
+              # an ID3 tag, or a bare MPEG frame sync
+              assert head == b"ID3" or (head[0] == 0xFF and head[1] & 0xE0 == 0xE0), f"{name}.mp3 is not an mp3"
+          print("ok: done.mp3 and request.mp3 are mp3s")
+          PY
+
+      - name: install.sh points [ui.sound] at the sounds, and --no-sounds leaves it alone
+        run: |
+          set -euo pipefail
+          dir="$(mktemp -d)"
+          printf '[ui.sound]\nenabled = false\ndone_path = "mine.mp3"\n\n[ui.sound.agents]\ndroid = "off"\n' > "$dir/config.toml"
+          ./install.sh --config "$dir/config.toml"
+          ./install.sh --config "$dir/config.toml"   # twice: must not duplicate keys
+          bare="$(mktemp -d)"
+          printf '[ui]\nsidebar_width = 30\n' > "$bare/config.toml"
+          ./install.sh --no-sounds --config "$bare/config.toml"
+          python3 - "$dir" "$bare" <<'PY'
+          import os, sys, tomllib
+          d, bare = sys.argv[1], sys.argv[2]
+          sound = tomllib.load(open(f"{d}/config.toml", "rb"))["ui"]["sound"]
+          assert sound["done_path"] == "sounds/swamp-club-done.mp3", sound
+          assert sound["request_path"] == "sounds/swamp-club-request.mp3", sound
+          assert sound["enabled"] is False, "the user's enabled setting was overwritten"
+          assert sound["agents"] == {"droid": "off"}, "[ui.sound.agents] was lost"
+          for key in ("done_path", "request_path"):
+              assert os.path.getsize(os.path.join(d, sound[key])) > 0
+          assert "sound" not in tomllib.load(open(f"{bare}/config.toml", "rb"))["ui"]
+          assert not os.path.exists(f"{bare}/sounds"), "--no-sounds still copied files"
+          print("ok: sounds wired in, user settings kept, --no-sounds respected")
+          PY
