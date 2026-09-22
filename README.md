@@ -73,10 +73,13 @@ of finished agents doesn't glow.
 
 Two short, soft chip-tune blips, with a nod to the hop in Frogger:
 
-| when | file | sound |
+| when | listen | sound |
 |---|---|---|
-| an agent finishes | [`sounds/done.mp3`](sounds/done.mp3) | two hops, then a bright landing chime |
-| an agent needs you | [`sounds/request.mp3`](sounds/request.mp3) | a hop cut short by a buzzy splat and a cyan/magenta glitch |
+| an agent finishes | [▶ `done.mp3`](https://cdn.jsdelivr.net/gh/sntxrr/herdr-swamp-club@main/sounds/done.mp3) | two hops, then a bright landing chime |
+| an agent needs you | [▶ `request.mp3`](https://cdn.jsdelivr.net/gh/sntxrr/herdr-swamp-club@main/sounds/request.mp3) | a hop cut short by a buzzy splat and a cyan/magenta glitch |
+
+The ▶ links play in the browser (GitHub itself can't play audio). Both files
+live in [`sounds/`](sounds/), exactly as the installer copies them.
 
 swamp-club.com has no audio of its own, and none of Frogger's is used: both
 are synthesized from scratch by [`sounds/make-sounds.py`](sounds/make-sounds.py)
