@@ -61,7 +61,7 @@ herdr server reload-config
 | borders, dim glyphs | `overlay0` `overlay1` | `#4b5563` `#6b7280` |
 | text / muted | `text` `subtext0` | `#d1d5db` `#9ca3af` |
 | the glow | `accent` | `#39ff14` |
-| done / attention / blocked | `green` `yellow` `red` | `#05df72` `#fde047` `#ff003c` |
+| done & ahead / working / needs attention & behind | `green` `yellow` `red` | `#05df72` `#fde047` `#ff003c` |
 | wisps | `teal` `mauve` `blue` `peach` | `#00d3f2` `#e879f9` `#60a5fa` `#ff8904` |
 
 `accent` and `green` are deliberately different: the neon marks focus and
