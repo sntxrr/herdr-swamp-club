@@ -1,4 +1,4 @@
-# Swamp Club -- a herdr theme. Bioluminescent swamp at night.
+# Swamp Club -- a herdr theme in the swamp-club.com palette.
 # https://github.com/sntxrr/herdr-swamp-club
 #
 # Paste this over the [theme] section of ~/.config/herdr/config.toml
@@ -13,27 +13,30 @@ name = "catppuccin"
 auto_switch = false
 
 [theme.custom]
-# surfaces: black water -> moss, greener as it comes forward
-panel_bg      = "#080a08"
-sidebar_bg    = "#0b0f0b"
-surface_dim   = "#0d120d"
-surface0      = "#121a12"
-surface1      = "#1a261a"
-active_row_bg = "#14241a"   # focused Space / Agent row: lit moss
-selection_bg  = "#1c3322"   # Navigate-mode cursor row: brighter moss
-overlay0      = "#3d5240"   # borders, separators, dim glyphs
-overlay1      = "#5f7a62"
+# Measured from swamp-club.com (Tailwind v4, oklch -> sRGB). Shared with
+# ghostty-swamp-club, so the panes and the sidebar read as one surface.
+#
+# surfaces: the site's black canvas and #080808 panels, then white/5..15 over black
+panel_bg      = "#080808"
+sidebar_bg    = "#000000"
+surface_dim   = "#0d0d0d"
+surface0      = "#1a1a1a"
+surface1      = "#262626"
+active_row_bg = "#071b0f"   # focused Space / Agent row: green-500/10 over panel
+selection_bg  = "#062e16"   # Navigate-mode cursor row: green-500/20 (= ghostty selection)
+overlay0      = "#4b5563"   # borders, separators, dim glyphs (gray-600: must stay legible as text)
+overlay1      = "#6b7280"
 
-# text: pale lichen on black
-text          = "#d6ead0"
-subtext0      = "#8fae8c"
+# text: the site's hud-label / hud-muted grays
+text          = "#d1d5db"
+subtext0      = "#9ca3af"
 
 # the glow
-accent        = "#39ff14"   # neon green -- highlights, focus
-green         = "#4ade80"   # done / ahead (distinct from accent on purpose)
-teal          = "#22d3ee"   # cyan wisp
+accent        = "#39ff14"   # neon green -- the site's glow and caret; highlights, focus
+green         = "#05df72"   # green-400, the site's accent text; done / ahead
+teal          = "#00d3f2"   # cyan-400, the logo
 blue          = "#60a5fa"
-mauve         = "#e879f9"   # magenta wisp
-peach         = "#fb923c"   # ember / working
+mauve         = "#e879f9"   # the site's default profile accent
+peach         = "#ff8904"   # orange-400; working
 yellow        = "#fde047"   # needs attention
-red           = "#ff003c"   # blocked / behind
+red           = "#ff003c"   # the neon glitch red; blocked / behind

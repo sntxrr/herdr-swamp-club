@@ -1,7 +1,8 @@
 # Swamp Club — a theme for [herdr](https://herdr.dev)
 
-Bioluminescent swamp at night: pitch-black water, a neon-green glow, and
-magenta and cyan will-o'-the-wisps for everything else.
+The [swamp-club.com](https://swamp-club.com) palette: a pure-black canvas,
+neutral gray text, a neon-green glow, and the site's cyan, magenta and
+glitch-red for everything else.
 
 ![herdr running the Swamp Club theme](screenshots/herdr.png)
 
@@ -55,13 +56,13 @@ herdr server reload-config
 
 | role | token | value |
 |---|---|---|
-| black water → moss | `panel_bg` `sidebar_bg` `surface_dim` `surface0` `surface1` | `#080a08` → `#1a261a` |
-| focused row / navigate cursor | `active_row_bg` `selection_bg` | `#14241a` `#1c3322` |
-| borders, dim glyphs | `overlay0` `overlay1` | `#3d5240` `#5f7a62` |
-| text / muted | `text` `subtext0` | `#d6ead0` `#8fae8c` |
+| black canvas → panels | `panel_bg` `sidebar_bg` `surface_dim` `surface0` `surface1` | `#080808` → `#262626` |
+| focused row / navigate cursor | `active_row_bg` `selection_bg` | `#071b0f` `#062e16` |
+| borders, dim glyphs | `overlay0` `overlay1` | `#4b5563` `#6b7280` |
+| text / muted | `text` `subtext0` | `#d1d5db` `#9ca3af` |
 | the glow | `accent` | `#39ff14` |
-| done / attention / blocked | `green` `yellow` `red` | `#4ade80` `#fde047` `#ff003c` |
-| wisps | `teal` `mauve` `blue` `peach` | `#22d3ee` `#e879f9` `#60a5fa` `#fb923c` |
+| done / attention / blocked | `green` `yellow` `red` | `#05df72` `#fde047` `#ff003c` |
+| wisps | `teal` `mauve` `blue` `peach` | `#00d3f2` `#e879f9` `#60a5fa` `#ff8904` |
 
 `accent` and `green` are deliberately different: the neon marks focus and
 highlights, while agent *done* states use the calmer green so a sidebar full
@@ -72,7 +73,7 @@ of finished agents doesn't glow.
 Every value lives under `[theme.custom]` and can be changed on its own.
 Three that people tend to want:
 
-- **Too bright?** Swap `accent` for `#4ade80` and `green` for `#39ff14`.
+- **Too bright?** Swap `accent` for `#05df72` and `green` for `#39ff14`.
 - **Panes should follow the terminal's background** rather than the theme's
   black: `panel_bg = "reset"`.
 - **Dracula/Nord/… as the base** instead of catppuccin: change `name`.
@@ -82,6 +83,7 @@ Three that people tend to want:
 ## Notes
 
 - Requires herdr 0.9 or newer (`[theme.custom]` with per-token overrides).
-- The palette is borrowed, with affection, from [swamp.club](https://swamp.club).
+- The palette is measured, with affection, from [swamp-club.com](https://swamp-club.com)
+  (its compiled Tailwind v4 CSS and the live page's computed styles).
   This project is not affiliated with Swamp Club, Inc.
 - MIT licensed.
