@@ -51,8 +51,12 @@ config_dir="$(dirname "$CONFIG")"
 mkdir -p "$config_dir"
 [ -f "$CONFIG" ] || : > "$CONFIG"
 
-# Drop existing [theme] and [theme.custom*] tables; keep everything else.
+# Drop existing [theme] and [theme.custom*] tables, and the header comment a
+# previous install put above them; keep everything else.
 stripped="$(awk '
+    /^# Swamp Club -- a herdr theme/                           { header = 1 }
+    header && /^#/                                             { next }
+    header                                                     { header = 0; if (/^[[:space:]]*$/) next }
     /^[[:space:]]*\[theme(\.[A-Za-z0-9_.]+)?\][[:space:]]*$/ { skip = 1; next }
     /^[[:space:]]*\[/                                          { skip = 0 }
     !skip

@@ -80,6 +80,7 @@ jobs:
           assert sound["request_path"] == "sounds/swamp-club-request.mp3", sound
           assert sound["enabled"] is False, "the user's enabled setting was overwritten"
           assert sound["agents"] == {"droid": "off"}, "[ui.sound.agents] was lost"
+          assert open(f"{d}/config.toml").read().count("# Swamp Club -- a herdr theme") == 1, "header duplicated on reinstall"
           for key in ("done_path", "request_path"):
               assert os.path.getsize(os.path.join(d, sound[key])) > 0
           assert "sound" not in tomllib.load(open(f"{bare}/config.toml", "rb"))["ui"]
