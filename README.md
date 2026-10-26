@@ -17,23 +17,34 @@ surface: [ghostty-swamp-club](https://github.com/sntxrr/ghostty-swamp-club).
 curl -fsSL https://raw.githubusercontent.com/sntxrr/herdr-swamp-club/main/install.sh | bash
 ```
 
-That backs up `~/.config/herdr/config.toml` next to itself, replaces the
-`[theme]` section with Swamp Club, installs the [sounds](#sounds), validates
-the result, and reloads a running herdr. Nothing else in your config is
-touched. Add `--no-sounds` for the colours alone. Add `--dry-run` to see the diff
-first:
+That backs up `~/.config/herdr/config.toml` next to itself, merges Swamp Club
+into it, installs the [sounds](#sounds), validates the result, and reloads a
+running herdr. Nothing else in your config is touched. Add `--no-sounds` for
+the colours alone. Add `--dry-run` to see the diff first:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/sntxrr/herdr-swamp-club/main/install.sh | bash -s -- --dry-run
 ```
 
+### What "merge" means
+
+The installer owns the tokens [`swamp-club.toml`](swamp-club.toml) defines:
+the 19 under `[theme.custom]`, plus `name` and `auto_switch` under `[theme]`.
+Those lines are set in place (added if missing). Everything else stays exactly
+as it was — other tables, comments, and any `[theme.custom]` token your
+previous theme set that Swamp Club does not (catppuccin's `surface2`, or your
+own `lavender`). Re-running the installer is a no-op.
+
+`auto_switch` is set to `false` on purpose: the tokens are fixed colours, so
+switching to a base theme's light variant would undo them.
+
 ### By hand
 
 1. Open `~/.config/herdr/config.toml`.
-2. Delete your existing `[theme]` and `[theme.custom]` sections, if any.
-   TOML allows each table once, so the new one can't simply be appended.
-3. Paste in the contents of [`swamp-club.toml`](swamp-club.toml).
-4. Reload:
+2. Set the tokens from [`swamp-club.toml`](swamp-club.toml) inside your
+   existing `[theme]` and `[theme.custom]` tables — the tables can only be
+   declared once, so edit values rather than appending a second copy.
+3. Reload:
 
    ```sh
    herdr server reload-config
@@ -43,8 +54,8 @@ curl -fsSL https://raw.githubusercontent.com/sntxrr/herdr-swamp-club/main/instal
 
 ## Uninstall
 
-Restore the backup the installer wrote (or delete the two `[theme]` tables
-and the two `# Swamp Club` lines under `[ui.sound]`) and reload:
+Restore the backup the installer wrote — that is the only way to get the
+tokens it overwrote (`accent`, `panel_bg`, …) back — then reload:
 
 ```sh
 cp ~/.config/herdr/config.toml.bak-<timestamp> ~/.config/herdr/config.toml
@@ -92,8 +103,10 @@ them for agents in background workspaces.
 
 ## Tweaks
 
-Every value lives under `[theme.custom]` and can be changed on its own.
-Three that people tend to want:
+Every value lives under `[theme.custom]` and can be changed on its own. Those
+changes survive a re-run of the installer **only** for tokens Swamp Club does
+not define; the 19 it does define are reset each time. Three that people tend
+to want:
 
 - **Too bright?** Swap `accent` for `#05df72` and `green` for `#39ff14`.
 - **Panes should follow the terminal's background** rather than the theme's
