@@ -35,21 +35,45 @@ jobs:
           print(f"ok: {len(got)} tokens, all #rrggbb")
           PY
 
-      - name: install.sh round-trips a config that already has a theme
+      - name: install.sh merges into a config that already has a theme
         run: |
           set -euo pipefail
           tmp="$(mktemp)"
-          printf 'onboarding = false\n[theme]\nname = "dracula"\n\n[theme.custom]\naccent = "#ff0000"\n\n[ui]\nsidebar_width = 30\n' > "$tmp"
+          {
+              printf 'onboarding = false\n\n'
+              printf '[theme]\nname = "dracula"\nauto_switch = true\n\n'
+              printf '[theme.custom]\n# a note from the user\n'
+              printf 'accent = "#ff0000"\nsurface2 = "#585b70"\n\n'
+              printf '[ui]\nsidebar_width = 30\n'
+          } > "$tmp"
           ./install.sh --config "$tmp"
           python3 - "$tmp" <<'PY'
           import sys, tomllib
-          cfg = tomllib.load(open(sys.argv[1], "rb"))
+          text = open(sys.argv[1]).read()
+          cfg = tomllib.loads(text)
           assert cfg["theme"]["name"] == "catppuccin"
-          assert cfg["theme"]["custom"]["accent"] == "#39ff14"
+          assert cfg["theme"]["auto_switch"] is False
+          tokens = cfg["theme"]["custom"]
+          assert tokens["accent"] == "#39ff14"
+          assert len([k for k, v in tokens.items() if v.startswith("#")]) >= 19
+          assert tokens["surface2"] == "#585b70", "a token Swamp Club doesn't define was dropped"
           assert cfg["ui"]["sidebar_width"] == 30, "unrelated table was lost"
           assert cfg["onboarding"] is False
-          print("ok: old theme replaced, other tables intact")
+          assert "# a note from the user" in text, "the user comment was lost"
+          print("ok: theme merged, other tokens and tables intact")
           PY
+
+      - name: install.sh is idempotent
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          printf '[theme]\nname = "catppuccin"\n' > "$tmp"
+          ./install.sh --no-sounds --config "$tmp"
+          cp "$tmp" "$tmp.once"
+          ./install.sh --no-sounds --config "$tmp"
+          cmp "$tmp.once" "$tmp"
+          test "$(grep -c '^# Swamp Club' "$tmp")" = 1
+          echo "ok: a second run changes nothing"
 
       - name: sounds are real mp3s
         run: |
@@ -80,10 +104,24 @@ jobs:
           assert sound["request_path"] == "sounds/swamp-club-request.mp3", sound
           assert sound["enabled"] is False, "the user's enabled setting was overwritten"
           assert sound["agents"] == {"droid": "off"}, "[ui.sound.agents] was lost"
-          assert open(f"{d}/config.toml").read().count("# Swamp Club -- a herdr theme") == 1, "header duplicated on reinstall"
+          assert open(f"{d}/config.toml").read().count("# Swamp Club -- a herdr theme") == 1, "marker duplicated on reinstall"
           for key in ("done_path", "request_path"):
               assert os.path.getsize(os.path.join(d, sound[key])) > 0
           assert "sound" not in tomllib.load(open(f"{bare}/config.toml", "rb"))["ui"]
           assert not os.path.exists(f"{bare}/sounds"), "--no-sounds still copied files"
           print("ok: sounds wired in, user settings kept, --no-sounds respected")
+          PY
+
+      - name: install.sh handles a config with no theme tables at all
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          printf '' > "$tmp"
+          ./install.sh --no-sounds --config "$tmp"
+          python3 - "$tmp" <<'PY'
+          import sys, tomllib
+          cfg = tomllib.load(open(sys.argv[1], "rb"))
+          assert cfg["theme"]["name"] == "catppuccin"
+          assert len(cfg["theme"]["custom"]) == 19
+          print("ok: empty config gets both tables")
           PY
